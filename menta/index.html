@@ -13,8 +13,8 @@
 }
 :root{
   --bg:#ffffff; --bg-alt:#f5f5f7; --fg:#1d1d1f; --fg2:#6e6e73; --line:rgba(0,0,0,.12);
-  --card:#ffffff; --card-alt:#f5f5f7; --accent:#0071e3; --accent-fg:#ffffff; --ref:#b8b8bf;
-  --sig1:#0a84ff; --sig2:#30d0c6;
+  --card:#ffffff; --card-alt:#f5f5f7; --accent:#1f7a45; --accent-fg:#ffffff; --ref:#b8b8bf;
+  --sig1:#2fae5a; --sig2:#30d0c6;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
@@ -22,12 +22,12 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#000000; --bg-alt:#0f0f10; --fg:#f5f5f7; --fg2:#a1a1a6; --line:rgba(255,255,255,.16);
-    --card:#1c1c1e; --card-alt:#161618; --accent:#2997ff; --ref:#5a5a60;
+    --card:#1c1c1e; --card-alt:#161618; --accent:#2a9558; --ref:#5a5a60;
   }
 }
 :root[data-theme="dark"]{
   --bg:#000000; --bg-alt:#0f0f10; --fg:#f5f5f7; --fg2:#a1a1a6; --line:rgba(255,255,255,.16);
-  --card:#1c1c1e; --card-alt:#161618; --accent:#2997ff; --ref:#5a5a60;
+  --card:#1c1c1e; --card-alt:#161618; --accent:#2a9558; --ref:#5a5a60;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(56px + env(safe-area-inset-top,0px));background:#000;-webkit-text-size-adjust:100%;overflow-x:hidden;width:100%}
@@ -39,7 +39,7 @@ a:hover{text-decoration:underline}
 button{font:inherit;color:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
 
-.dark{--bg:#000;--bg-alt:#0f0f10;--fg:#f5f5f7;--fg2:#a1a1a6;--line:rgba(255,255,255,.16);--card:#1c1c1e;--card-alt:#161618;--accent:#2997ff;--ref:#5a5a60;background:#000;color:var(--fg)}
+.dark{--bg:#000;--bg-alt:#0f0f10;--fg:#f5f5f7;--fg2:#a1a1a6;--line:rgba(255,255,255,.16);--card:#1c1c1e;--card-alt:#161618;--accent:#2a9558;--ref:#5a5a60;background:#000;color:var(--fg)}
 .sec{padding:clamp(88px,14vw,180px) 0;background:var(--bg);color:var(--fg)}
 .sec.alt{background:var(--bg-alt)}
 .sec.dark{background:#000;color:var(--fg)}
@@ -54,7 +54,7 @@ p{margin:0 0 1em}
 .body strong{color:var(--fg);font-weight:600}
 .lead{font-size:clamp(20px,2.4vw,28px);line-height:1.32;font-weight:500;letter-spacing:-.02em;color:var(--fg2);margin:28px 0 0;max-width:32ch}
 .lead strong{color:var(--fg);font-weight:600}
-.grad{background:linear-gradient(100deg,#64d2ff 0%,#30d0c6 45%,#34c759 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.grad{background:linear-gradient(100deg,#7be495 0%,#34c759 55%,#30d0c6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 
 /* Botones */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 30px;border-radius:999px;border:0;cursor:pointer;
@@ -63,8 +63,8 @@ p{margin:0 0 1em}
 .btn:active{transform:scale(.98)}
 .btn.light{background:#f5f5f7;color:#1d1d1f}
 .btn.ghost{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
-.btn-sm{min-height:30px;padding:0 14px;font-size:13px;border-radius:999px;border:0;cursor:pointer;background:#0a84ff;color:#fff;font-weight:500;white-space:nowrap}
-.btn-sm:hover{background:#2f97ff}
+.btn-sm{min-height:30px;padding:0 14px;font-size:13px;border-radius:999px;border:0;cursor:pointer;background:#2a9558;color:#fff;font-weight:500;white-space:nowrap}
+.btn-sm:hover{background:#33a868}
 
 /* Nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);
@@ -76,14 +76,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-ins
 .links{display:flex;gap:26px;margin-left:auto;margin-right:8px}
 .links a{font-size:12px;color:rgba(245,245,247,.8);white-space:nowrap}
 .links a:hover{color:#fff;text-decoration:none}
-#progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,#64d2ff,#34c759);transform:scaleX(0);transform-origin:0 50%}
+#progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,#30d0c6,#34c759);transform:scaleX(0);transform-origin:0 50%}
+.nav-l{display:flex;align-items:center;gap:14px;min-width:0}
+.back{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px 0 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f5f5f7;font-size:13px;font-weight:500;white-space:nowrap;transition:background .2s ease}
+.back:hover{background:rgba(255,255,255,.2);text-decoration:none}
+.back svg{width:16px;height:16px;flex:none}
+.back:focus-visible{outline:2px solid #34c759;outline-offset:3px}
 @media(max-width:760px){.links{display:none}}
+@media(max-width:380px){.brand{display:none}}
 
 /* Hero con hoja de menta */
 .hero{position:relative;background:#000;color:#f5f5f7}
 .hero-pin{position:relative;height:100svh;min-height:600px;overflow:hidden}
 .glow{position:absolute;left:50%;top:58%;width:min(120vw,1100px);aspect-ratio:1;margin:calc(min(120vw,1100px) / -2) 0 0 calc(min(120vw,1100px) / -2);border-radius:50%;
-  background:radial-gradient(circle,rgba(48,208,120,.42) 0%,rgba(10,132,255,.22) 38%,transparent 66%);filter:blur(40px);pointer-events:none}
+  background:radial-gradient(circle,rgba(48,208,120,.42) 0%,rgba(48,208,198,.16) 38%,transparent 66%);filter:blur(40px);pointer-events:none}
 .hero-copy{position:absolute;left:0;right:0;top:calc(76px + 3svh);text-align:center;z-index:3;padding:0 20px}
 .hero-copy .kicker{font-size:clamp(16px,1.9vw,22px);font-weight:600;margin:0 0 12px}
 .hero-copy h1{font-size:clamp(44px,9.6vw,128px);letter-spacing:-.05em;line-height:.98}
@@ -290,7 +296,12 @@ td b{color:var(--fg)}
 
 <nav>
   <div class="nav-in">
-    <a class="brand" href="#top">Mentha arvensis</a>
+    <div class="nav-l">
+      <a class="back" href="/" aria-label="Volver a todos los proyectos" title="Volver a todos los proyectos">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>Volver
+      </a>
+      <a class="brand" href="#top">Mentha arvensis</a>
+    </div>
     <div class="links">
       <a href="#como">Cómo funciona</a>
       <a href="#tira">La tira</a>
