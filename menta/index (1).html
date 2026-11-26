@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mentha arvensis · La menta que detecta el plomo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @view-transition {
+  navigation: auto;
+}
+:root{
+  --bg:#ffffff; --bg-alt:#f5f5f7; --fg:#1d1d1f; --fg2:#6e6e73; --line:rgba(0,0,0,.12);
+  --card:#ffffff; --card-alt:#f5f5f7; --accent:#1f7a45; --accent-fg:#ffffff; --ref:#b8b8bf;
+  --sig1:#2fae5a; --sig2:#30d0c6;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --bg-alt:#0f0f10; --fg:#f5f5f7; --fg2:#a1a1a6; --line:rgba(255,255,255,.16);
+    --card:#1c1c1e; --card-alt:#161618; --accent:#2a9558; --ref:#5a5a60;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --bg-alt:#0f0f10; --fg:#f5f5f7; --fg2:#a1a1a6; --line:rgba(255,255,255,.16);
+  --card:#1c1c1e; --card-alt:#161618; --accent:#2a9558; --ref:#5a5a60;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(56px + env(safe-area-inset-top,0px));background:#000;-webkit-text-size-adjust:100%;overflow-x:hidden;width:100%}
+body{margin:0;background:var(--bg);color:var(--fg);overflow-x:hidden;width:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5;letter-spacing:-.011em}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font:inherit;color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+
+.dark{--bg:#000;--bg-alt:#0f0f10;--fg:#f5f5f7;--fg2:#a1a1a6;--line:rgba(255,255,255,.16);--card:#1c1c1e;--card-alt:#161618;--accent:#2a9558;--ref:#5a5a60;background:#000;color:var(--fg)}
+.sec{padding:clamp(88px,14vw,180px) 0;background:var(--bg);color:var(--fg)}
+.sec.alt{background:var(--bg-alt)}
+.sec.dark{background:#000;color:var(--fg)}
+.wrap{width:min(1080px,100% - 48px);margin:0 auto}
+
+.eyebrow{font-size:clamp(17px,2vw,21px);font-weight:600;color:var(--fg2);margin:0 0 14px}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.035em;line-height:1.05}
+h2{font-size:clamp(36px,6.4vw,80px)}
+h3{font-size:clamp(22px,2.6vw,32px);letter-spacing:-.025em;line-height:1.12}
+p{margin:0 0 1em}
+.body{font-size:clamp(17px,1.5vw,20px);color:var(--fg2);line-height:1.55;max-width:58ch}
+.body strong{color:var(--fg);font-weight:600}
+.lead{font-size:clamp(20px,2.4vw,28px);line-height:1.32;font-weight:500;letter-spacing:-.02em;color:var(--fg2);margin:28px 0 0;max-width:32ch}
+.lead strong{color:var(--fg);font-weight:600}
+.grad{background:linear-gradient(100deg,#7be495 0%,#34c759 55%,#30d0c6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 30px;border-radius:999px;border:0;cursor:pointer;
+  background:var(--accent);color:#fff;font-size:17px;font-weight:500;letter-spacing:-.01em;transition:transform .2s ease,background .2s ease}
+.btn:hover{transform:scale(1.03);text-decoration:none}
+.btn:active{transform:scale(.98)}
+.btn.light{background:#f5f5f7;color:#1d1d1f}
+.btn.ghost{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.btn-sm{min-height:30px;padding:0 14px;font-size:13px;border-radius:999px;border:0;cursor:pointer;background:#2a9558;color:#fff;font-weight:500;white-space:nowrap}
+.btn-sm:hover{background:#33a868}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);
+  background:rgba(0,0,0,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-in{height:48px;width:min(1080px,100% - 32px);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-size:15px;font-weight:600;color:#f5f5f7;white-space:nowrap}
+.brand:hover{text-decoration:none}
+.links{display:flex;gap:26px;margin-left:auto;margin-right:8px}
+.links a{font-size:12px;color:rgba(245,245,247,.8);white-space:nowrap}
+.links a:hover{color:#fff;text-decoration:none}
+#progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:linear-gradient(90deg,#30d0c6,#34c759);transform:scaleX(0);transform-origin:0 50%}
+.nav-l{display:flex;align-items:center;gap:14px;min-width:0}
+.back{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 14px 0 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f5f5f7;font-size:13px;font-weight:500;white-space:nowrap;transition:background .2s ease}
+.back:hover{background:rgba(255,255,255,.2);text-decoration:none}
+.back svg{width:16px;height:16px;flex:none}
+.back:focus-visible{outline:2px solid #34c759;outline-offset:3px}
+@media(max-width:760px){.links{display:none}}
+@media(max-width:380px){.brand{display:none}}
+
+/* Hero con hoja de menta */
+.hero{position:relative;background:#000;color:#f5f5f7}
+.hero-pin{position:relative;height:100svh;min-height:600px;overflow:hidden}
+.glow{position:absolute;left:50%;top:58%;width:min(120vw,1100px);aspect-ratio:1;margin:calc(min(120vw,1100px) / -2) 0 0 calc(min(120vw,1100px) / -2);border-radius:50%;
+  background:radial-gradient(circle,rgba(48,208,120,.42) 0%,rgba(48,208,198,.16) 38%,transparent 66%);filter:blur(40px);pointer-events:none}
+.hero-copy{position:absolute;left:0;right:0;top:calc(76px + 3svh);text-align:center;z-index:3;padding:0 20px}
+.hero-copy .kicker{font-size:clamp(16px,1.9vw,22px);font-weight:600;margin:0 0 12px}
+.hero-copy h1{font-size:clamp(44px,9.6vw,128px);letter-spacing:-.05em;line-height:.98}
+.leaf-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-top:22svh;z-index:2;pointer-events:none}
+.leaf{width:min(74vw,600px);height:auto;display:block;will-change:transform;}
+.hero-copy2{position:absolute;left:0;right:0;bottom:calc(9svh + env(safe-area-inset-bottom,0px));text-align:center;z-index:4;padding:0 20px;visibility:hidden;opacity:0}
+.hero-copy2 p{font-size:clamp(28px,5vw,60px);font-weight:600;letter-spacing:-.04em;line-height:1.08;margin:0 auto 28px;max-width:16ch}
+.scroll-cue{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:50%;width:26px;height:42px;margin-left:-13px;border:1.5px solid rgba(255,255,255,.4);border-radius:14px;z-index:4}
+.scroll-cue::after{content:"";position:absolute;left:50%;top:8px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:#fff;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+html.static .hero-copy2{visibility:visible;opacity:1}
+html.static .hero-copy2 p{display:none}
+html.static .leaf{width:min(64vw,520px)}
+
+/* Declaración */
+.statement{background:#000;color:#f5f5f7;padding:clamp(110px,20vw,280px) 0}
+.statement p{font-size:clamp(34px,6.4vw,84px);font-weight:600;letter-spacing:-.04em;line-height:1.08;margin:0;max-width:16ch}
+.statement .w{display:inline-block;white-space:pre}
+
+/* Cifras */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:64px;border-top:1px solid var(--line)}
+.stat{padding:36px 20px 0 0}
+.stat + .stat{padding-left:24px;border-left:1px solid var(--line)}
+.stat .n{font-size:clamp(44px,6vw,80px);font-weight:600;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.42em;letter-spacing:-.02em;margin-left:4px;color:var(--fg2);font-weight:600}
+.stat .t{font-size:15px;color:var(--fg2);margin-top:12px;max-width:20ch;line-height:1.35}
+@media(max-width:860px){
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:30px 16px 30px 0}
+  .stat + .stat{border-left:0;padding-left:0}
+  .stat:nth-child(even){padding-left:20px;border-left:1px solid var(--line)}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+}
+
+/* Cómo funciona */
+.flow{margin-top:72px;display:grid;gap:clamp(40px,7vw,88px)}
+.fstep{display:grid;grid-template-columns:clamp(56px,9vw,120px) 1fr;gap:clamp(12px,3vw,40px);align-items:start}
+.fstep .num{font-size:clamp(48px,8vw,112px);font-weight:600;letter-spacing:-.06em;line-height:.9;color:var(--fg2)}
+.fstep h3{font-size:clamp(28px,4.6vw,56px);letter-spacing:-.04em}
+.fstep p{margin:14px 0 0;color:var(--fg2);font-size:clamp(17px,1.6vw,21px);max-width:44ch}
+
+/* Evidencia */
+.chart-card{border-radius:32px;padding:clamp(22px,3vw,44px);background:var(--card);margin-top:56px}
+svg.plot{width:100%;height:auto;display:block;overflow:visible}
+svg.plot text{fill:var(--fg2);font-family:inherit;font-size:13px}
+svg.plot .grid{stroke:var(--line);stroke-width:1}
+svg.plot .ln1{stroke:var(--sig1);fill:none;stroke-width:4;stroke-linecap:round}
+svg.plot .ln2{stroke:var(--sig2);fill:none;stroke-width:4;stroke-linecap:round}
+svg.plot .pt1{fill:var(--sig1)} svg.plot .pt2{fill:var(--sig2)}
+svg.plot .thr{stroke:var(--fg2);stroke-width:1.2;stroke-dasharray:4 5}
+svg.plot .val{fill:var(--fg);font-weight:600;font-size:13px}
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:20px;font-size:14px;color:var(--fg2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);align-items:end}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.big-delta{font-size:clamp(64px,10vw,140px);font-weight:600;letter-spacing:-.06em;line-height:.95}
+.big-delta small{display:block;font-size:clamp(15px,1.6vw,18px);letter-spacing:0;color:var(--fg2);font-weight:500;margin-top:10px;max-width:26ch;line-height:1.4}
+
+/* Dos herramientas */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+@media(max-width:1100px){.tools{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.tools{grid-template-columns:1fr}}
+.tool{border-radius:32px;padding:clamp(28px,4vw,52px);background:var(--card);display:flex;flex-direction:column;min-height:420px}
+.tool .tag{font-size:15px;font-weight:600;color:var(--fg2)}
+.tool h3{font-size:clamp(28px,3.4vw,44px);margin:10px 0 14px}
+.tool p{color:var(--fg2);font-size:17px}
+.tool .k{margin-top:auto;padding-top:24px;border-top:1px solid var(--line);display:grid;gap:12px}
+.tool .k div{display:flex;justify-content:space-between;gap:20px;font-size:16px}
+.tool .k span:first-child{color:var(--fg2)}
+.tool .k span:last-child{font-weight:600;text-align:right}
+
+/* Cierre */
+.close h2{max-width:13ch}
+.close .body{margin-top:32px;max-width:52ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:44px}
+
+footer{background:#000;color:#86868b;padding:56px 0 calc(56px + env(safe-area-inset-bottom,0px));font-size:13px;text-align:center}
+footer .wrap{border-top:1px solid rgba(255,255,255,.14);padding-top:28px}
+footer strong{color:#f5f5f7;font-weight:600}
+
+/* ============ HOJA DEL INFORME COMPLETO ============ */
+.sheet{position:fixed;inset:0;z-index:100;background:var(--bg);color:var(--fg);overflow-y:auto;overflow-x:hidden;max-width:100vw;overscroll-behavior:contain;
+  visibility:hidden;transform:translateY(100%);transition:transform .55s cubic-bezier(.32,.72,0,1),visibility 0s linear .55s;-webkit-overflow-scrolling:touch}
+.sheet.open{visibility:visible;transform:none;transition:transform .55s cubic-bezier(.32,.72,0,1),visibility 0s}
+.sheet-bar{position:sticky;top:0;z-index:5;padding-top:env(safe-area-inset-top,0px);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.sheet-bar-in{height:52px;width:min(1120px,100% - 32px);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.sheet-bar strong{font-size:16px;font-weight:600;letter-spacing:-.02em}
+.sheet-bar .close-btn{min-height:32px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;background:var(--bg-alt);font-size:14px;font-weight:500;color:var(--fg)}
+.sheet-bar .close-btn:hover{background:var(--line)}
+.sheet-body{width:min(1120px,100% - 32px);margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(28px,5vw,72px);padding:clamp(28px,5vw,64px) 0 calc(96px + env(safe-area-inset-bottom,0px))}
+.toc{position:sticky;top:calc(52px + env(safe-area-inset-top,0px) + 32px);align-self:start}
+.toc p{font-size:13px;font-weight:600;color:var(--fg2);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.toc a{display:block;padding:7px 0 7px 16px;margin-left:-1px;border-left:2px solid transparent;font-size:14.5px;color:var(--fg2);line-height:1.3}
+.toc a:hover{color:var(--fg);text-decoration:none}
+.toc a.on{color:var(--fg);font-weight:600;border-left-color:var(--accent)}
+@media(max-width:900px){
+  .sheet-body{display:block;padding-top:0}
+  .doc,.doc>section,.doc .tw,.doc .callout,.doc .key,.doc .people,.doc ul,.doc ol{width:100%;max-width:100%;min-width:0}
+  .toc{min-width:0;max-width:100vw}
+  .toc ol{max-width:100%}
+  .toc{position:sticky;top:calc(52px + env(safe-area-inset-top,0px));z-index:4;background:var(--bg);margin:0 -16px;padding:10px 16px;width:auto;border-bottom:1px solid var(--line)}
+  .toc p{display:none}
+  .toc ol{display:flex;gap:8px;overflow-x:auto;border:0;scrollbar-width:none}
+  .toc ol::-webkit-scrollbar{display:none}
+  .toc a{white-space:nowrap;border:0;margin:0;padding:7px 14px;border-radius:999px;background:var(--bg-alt)}
+  .toc a.on{background:var(--accent);color:#fff}
+  .doc{padding-top:28px}
+}
+.doc{font-size:17px;line-height:1.6;min-width:0;max-width:100%;overflow-wrap:anywhere}
+.doc section{scroll-margin-top:calc(52px + env(safe-area-inset-top,0px) + 76px);padding-bottom:clamp(40px,6vw,72px);margin-bottom:clamp(40px,6vw,72px);border-bottom:1px solid var(--line)}
+.doc section:last-of-type{border-bottom:0}
+.doc h2{font-size:clamp(32px,4.4vw,52px);margin-bottom:8px}
+.doc .sn{font-size:15px;font-weight:600;color:var(--accent);margin:0 0 8px}
+.doc h3{font-size:clamp(21px,2.2vw,26px);margin:44px 0 12px;letter-spacing:-.025em}
+.doc h4{font-size:17px;font-weight:600;margin:26px 0 8px;letter-spacing:-.01em}
+.doc p{color:var(--fg2);max-width:68ch}
+.doc p strong,.doc li strong{color:var(--fg);font-weight:600}
+.doc ul,.doc ol.n{max-width:68ch;color:var(--fg2);padding-left:22px;margin:0 0 1em}
+.doc li{margin:7px 0;padding-left:4px}
+.doc li::marker{color:var(--fg2)}
+.doc ol.n li::marker{font-weight:600;color:var(--accent)}
+.key{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 8px}
+@media(max-width:700px){.key{grid-template-columns:1fr 1fr}}
+.key div{background:var(--bg-alt);border-radius:20px;padding:20px}
+.key b{display:block;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.04em;line-height:1;font-weight:600;color:var(--fg)}
+.key span{display:block;margin-top:8px;font-size:13.5px;color:var(--fg2);line-height:1.35}
+.callout{background:var(--bg-alt);border-radius:20px;padding:22px 24px;margin:20px 0;max-width:68ch}
+.callout p{margin:0;color:var(--fg2)}
+.callout .ct{font-size:13px;font-weight:600;color:var(--fg);margin-bottom:6px;display:block}
+.formula{font-size:clamp(20px,2.6vw,28px);font-weight:600;letter-spacing:-.03em;color:var(--fg);margin:8px 0 0}
+.tw{overflow-x:auto;margin:16px 0 26px;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:15.5px;font-variant-numeric:tabular-nums}
+caption{text-align:left;font-size:13.5px;font-weight:600;color:var(--fg2);padding-bottom:10px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--fg2)}
+th{font-weight:600;color:var(--fg);border-bottom:1.5px solid var(--fg2);white-space:nowrap}
+td:first-child,th:first-child{color:var(--fg);font-weight:600}
+td.hl{color:var(--fg);font-weight:600}
+td b{color:var(--fg)}
+.doc ul.refs{list-style:none;padding:0;margin:20px 0 0;border-top:1px solid var(--line);max-width:none}
+.refs li{margin:0;padding:16px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--fg2);line-height:1.5}
+.refs li b{color:var(--fg);font-weight:600}
+.refs li a{word-break:break-all}
+.people{display:grid;gap:0;border-top:1px solid var(--line);max-width:68ch}
+.people div{padding:16px 0;border-bottom:1px solid var(--line)}
+.people b{display:block;color:var(--fg);font-weight:600;font-size:17px}
+.people span{color:var(--fg2);font-size:15.5px}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .scroll-cue::after{animation:none;opacity:1}
+  .sheet,.sheet.open{transition:none}
+}
+.leaf-in{display:flex}
+.sec:not(.alt) .chart-card{background:var(--card-alt)}
+.doc h3{scroll-margin-top:calc(52px + env(safe-area-inset-top,0px) + 76px)}
+
+/* Tira reactiva interactiva */
+.demo{margin-top:56px;border-radius:32px;background:var(--card);padding:clamp(28px,4vw,56px);text-align:center}
+.demo-h{font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.03em;margin:0;line-height:1.1}
+.demo-s{color:var(--fg2);font-size:17px;margin:8px 0 0}
+.strip{margin:34px auto 30px;width:min(560px,100%);border-radius:22px;padding:34px 20px 22px;position:relative;
+  background:repeating-linear-gradient(92deg,rgba(120,100,70,.05) 0 2px,transparent 2px 7px),linear-gradient(180deg,#f6f1e7,#ece5d6);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 18px 40px rgba(0,0,0,.16)}
+.strip-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.spot-col{display:flex;flex-direction:column;align-items:center;gap:14px}
+.spot-col span{font-size:14px;font-weight:600;color:#6b6252}
+.spot-wrap{width:clamp(88px,20vw,132px);aspect-ratio:1}
+.spot{width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#0a6fd8 0%,#1aa5c9 42%,rgba(48,208,198,.55) 62%,rgba(48,208,198,0) 74%);
+  transition:opacity .6s ease}
+.spot.ref{opacity:.55}
+.spot.smp{opacity:.98}
+.spot.smp.low{opacity:.2}
+.seg{display:inline-flex;padding:4px;border-radius:999px;background:var(--bg-alt);gap:2px;max-width:100%}
+.seg button{border:0;background:transparent;color:var(--fg2);font-size:15px;font-weight:500;padding:10px 20px;border-radius:999px;cursor:pointer;transition:background .25s,color .25s;line-height:1.2}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--fg);box-shadow:0 1px 5px rgba(0,0,0,.2)}
+@media(max-width:600px){.seg{display:grid;grid-template-columns:1fr;border-radius:24px;width:100%}}
+.verdict{margin:30px auto 0;max-width:46ch;min-height:118px}
+.vt,.vs2{transition:opacity .25s ease,transform .25s ease}
+.vt{font-size:clamp(22px,2.8vw,30px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin:0}
+.vs2{color:var(--fg2);font-size:17px;margin:12px 0 0}
+.verdict.swap .vt,.verdict.swap .vs2{opacity:0;transform:translateY(6px)}
+.strip.four{width:min(640px,100%)}
+.strip.four .spot-wrap{width:100%;max-width:92px}
+.strip.four .spot-col{text-align:center}
+.strip.four .spot-col span{line-height:1.3}
+.strip.four .spot-col em{display:block;font-style:normal;font-weight:500;font-size:12px;opacity:.8}
+.strip.four .strip-grid{grid-template-columns:repeat(4,1fr);gap:10px}
+.spot-col .spot-wrap{border-radius:50%;transition:box-shadow .3s ease}
+.spot-col.on .spot-wrap{box-shadow:0 0 0 3px #2a9558,0 0 0 7px rgba(42,149,88,.22)}
+.spot-col.on .spot{opacity:.98}
+@media(max-width:600px){.strip.four .strip-grid{grid-template-columns:1fr 1fr;gap:22px 10px}}
+@media(min-width:601px) and (max-width:900px){.seg{display:grid;grid-template-columns:1fr 1fr;border-radius:24px;width:100%}}
+.demo-note{font-size:13.5px;color:var(--fg2);margin:22px auto 0;max-width:52ch}
+
+.perks{display:grid;grid-template-columns:repeat(3,1fr);margin-top:72px;border-top:1px solid var(--line)}
+.perks > div{padding:30px 24px 0 0}
+.perks > div + div{padding-left:24px;border-left:1px solid var(--line)}
+.perks h3{font-size:clamp(26px,3.4vw,40px);letter-spacing:-.04em}
+.perks p{color:var(--fg2);font-size:17px;margin:12px 0 0;max-width:26ch}
+@media(max-width:760px){
+  .perks{grid-template-columns:1fr}
+  .perks > div,.perks > div + div{padding:26px 0;border-left:0;border-bottom:1px solid var(--line)}
+}
+.invite{margin-top:96px;padding:clamp(32px,5vw,64px);border-radius:32px;background:#000;color:#f5f5f7}
+.invite-t{font-size:clamp(28px,4.6vw,56px);font-weight:600;letter-spacing:-.04em;line-height:1.08;margin:0;max-width:18ch}
+.invite .body{color:#a1a1a6}
+.invite .cta-row{margin-top:32px}
+.tool .btn.ghost{min-height:44px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-l">
+      <a class="back" href="/" aria-label="Volver a todos los proyectos" title="Volver a todos los proyectos">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>Volver
+      </a>
+      <a class="brand" href="#top">Mentha arvensis</a>
+    </div>
+    <div class="links">
+      <a href="#como">Cómo funciona</a>
+      <a href="#tira">Diagnóstico por lotes</a>
+      <a href="#evidencia">Resultados</a>
+    </div>
+    <button class="btn-sm" type="button" data-open-detail>Informe completo</button>
+  </div>
+  <div id="progress"></div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-pin">
+    <div class="hero-copy">
+      <p class="kicker">Un proyecto de química y ecología</p>
+      <h1>La menta<br><span class="grad">detecta el plomo.</span></h1>
+    </div>
+    <div class="leaf-wrap"><div class="leaf-in"><img class="leaf" src="imagenes/hojas.webp" alt="Hojas de menta" width="1054" height="835"></div></div>
+    <div class="hero-copy2">
+      <p>Una planta. Una tira. Un color azul.</p>
+      <button class="btn" type="button" data-open-detail>Ver el informe completo</button>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"></div>
+  </div>
+</header>
+
+<!-- IDEA -->
+<section class="statement" aria-label="Idea central">
+  <div class="wrap"><p id="statement">Cuando una planta sufre, cambia por dentro. Aprendimos a leer ese cambio.</p></div>
+</section>
+
+<!-- LO ESENCIAL -->
+<section class="sec" id="cifras">
+  <div class="wrap">
+    <p class="eyebrow reveal">Lo esencial</p>
+    <h2 class="reveal">Un método simple<br>para un problema serio.</h2>
+    <p class="lead reveal">Traés un litro de tu tierra y la menta nos avisa si tiene plomo. <strong>Nosotros hacemos el cultivo y el análisis.</strong></p>
+    <div class="stats stagger">
+      <div class="stat"><div class="n"><span data-count="1">1</span><small>litro</small></div><div class="t">de tierra es todo lo que tenés que traer</div></div>
+      <div class="stat"><div class="n"><span data-count="6">6</span><small>plantas</small></div><div class="t">de referencia crecen junto a tu muestra</div></div>
+      <div class="stat"><div class="n"><span data-count="2">2</span><small>meses</small></div><div class="t">entre un lote y el siguiente, aproximadamente</div></div>
+      <div class="stat"><div class="n"><span data-count="350">350</span><small>ppm</small></div><div class="t">de plomo: el límite que la menta soporta antes de enfermarse</div></div>
+    </div>
+    <p class="body reveal" style="margin-top:28px;font-size:14px">ppm significa partes por millón: una forma de medir cuánto plomo hay en la tierra.</p>
+    <div class="callout reveal" style="margin-top:36px"><span class="ct">Por qué importa acá</span><p>En Almirante Brown, ACUMAR ya encontró plomo por encima de los valores de referencia en barrios como La Cumbre y Campo Ramos, cerca de zonas industriales y de quema de chatarra y cables. Es un problema real y cercano.</p></div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="sec dark" id="como">
+  <div class="wrap">
+    <p class="eyebrow reveal">Cómo funciona</p>
+    <h2 class="reveal">Tres pasos.<br><span class="grad">Una respuesta.</span></h2>
+    <p class="lead reveal">Vos traés la tierra. <strong>Nosotros hacemos el resto.</strong></p>
+    <div class="flow">
+      <div class="fstep">
+        <div class="num">1</div>
+        <div><h3>Recibimos tu tierra.</h3><p>Traés un litro del suelo que querés revisar. Lo identificamos y lo sumamos al próximo lote, que armamos más o menos cada dos meses.</p></div>
+      </div>
+      <div class="fstep">
+        <div class="num">2</div>
+        <div><h3>Crece junto a referencias.</h3><p>La menta de tu muestra se cultiva al mismo tiempo que seis plantas con plomo conocido: dos casi sin plomo, dos con 150 ppm y dos con 350 ppm.</p></div>
+      </div>
+      <div class="fstep">
+        <div class="num">3</div>
+        <div><h3>Comparamos los colores.</h3><p>Sacamos el aceite de las hojas y lo probamos en tiras reactivas. Si el azul de tu muestra se parece al de una referencia, sabemos dónde ubicarla.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO POR LOTES -->
+<section class="sec alt" id="tira">
+  <div class="wrap">
+    <p class="eyebrow reveal">Diagnóstico por lotes</p>
+    <h2 class="reveal">Tu muestra,<br>junto a seis referencias.</h2>
+    <p class="lead reveal">Todas las plantas atraviesan el mismo ciclo, así que <strong>el lote se calibra a sí mismo.</strong> Comparamos entre ellas, no contra un color fijo de otro momento.</p>
+
+    <div class="demo reveal">
+      <div class="demo-top">
+        <p class="demo-h">Probalo vos</p>
+        <p class="demo-s">Elegí a qué se parece tu muestra y mirá qué significa.</p>
+      </div>
+      <div class="strip four" aria-hidden="true">
+        <div class="strip-grid">
+          <div class="spot-col" data-ref="blank"><div class="spot-wrap"><div class="spot ref"></div></div><span>Blanco<br><em>menos de 50 ppm</em></span></div>
+          <div class="spot-col" data-ref="std"><div class="spot-wrap"><div class="spot ref"></div></div><span>Estándar<br><em>150 ppm</em></span></div>
+          <div class="spot-col" data-ref="pos"><div class="spot-wrap"><div class="spot ref"></div></div><span>Control<br><em>350 ppm</em></span></div>
+          <div class="spot-col"><div class="spot-wrap"><div class="spot smp" id="smpSpot"></div></div><span>Tu muestra<br><em>mismo lote</em></span></div>
+        </div>
+      </div>
+      <div class="seg" role="group" aria-label="A qué se parece tu muestra">
+        <button type="button" data-v="blank" aria-pressed="true">Como un blanco</button>
+        <button type="button" data-v="std" aria-pressed="false">Como el de 150</button>
+        <button type="button" data-v="pos" aria-pressed="false">Como el de 350</button>
+        <button type="button" data-v="mid" aria-pressed="false">Entre dos</button>
+      </div>
+      <div class="verdict" id="verdict" aria-live="polite">
+        <p class="vt" id="vt">Tu suelo se parece a uno con poco plomo.</p>
+        <p class="vs2" id="vs2">Responde como los blancos del lote, con menos de 50 ppm.</p>
+      </div>
+      <p class="demo-note">Esquema conceptual: los tonos reales cambian en cada lote, por eso cada muestra se lee siempre contra sus propias referencias.</p>
+    </div>
+
+    <div class="perks stagger">
+      <div><h3>Comparativo</h3><p>Tu muestra y las referencias crecen en el mismo ciclo.</p></div>
+      <div><h3>Compartido</h3><p>Un mismo lote procesa varias muestras a la vez.</p></div>
+      <div><h3>Orientativo</h3><p>Es semicuantitativo: no reemplaza un análisis de laboratorio.</p></div>
+    </div>
+
+    <div class="invite reveal">
+      <p class="invite-t">Vos traés la tierra. Nosotros hacemos el diagnóstico.</p>
+      <p class="body" style="margin:14px 0 0">No hace falta plantar menta, preparar reactivos ni interpretar tiras. Acercanos un litro de suelo y lo sumamos al próximo lote.</p>
+      <div class="cta-row"><button class="btn" type="button" data-open-detail="#d-lotes">Ver cómo se hace</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section class="sec" id="evidencia">
+  <div class="wrap">
+    <p class="eyebrow reveal">Resultados</p>
+    <h2 class="reveal">Hay un punto<br>de quiebre.</h2>
+    <p class="lead reveal">Con más plomo, la planta responde más. Hasta que se enferma y la señal <strong>se cae.</strong> Ese pico marca su límite: unos 350 ppm.</p>
+
+    <div class="chart-card reveal">
+      <svg class="plot" viewBox="0 0 640 360" role="img" aria-label="Gráfico: la cantidad de azul sube hasta agregar 250 ppm de plomo y después cae">
+        <g>
+          <line class="grid" x1="70" x2="600" y1="300" y2="300"/>
+          <line class="grid" x1="70" x2="600" y1="210" y2="210"/>
+          <line class="grid" x1="70" x2="600" y1="120" y2="120"/>
+          <line class="grid" x1="70" x2="600" y1="30" y2="30"/>
+          <text x="58" y="304" text-anchor="end">0</text>
+          <text x="58" y="214" text-anchor="end">10</text>
+          <text x="58" y="124" text-anchor="end">20</text>
+          <text x="58" y="34" text-anchor="end">30</text>
+          <text x="18" y="170" transform="rotate(-90 18 170)" text-anchor="middle">cuánto azul aparece (%)</text>
+        </g>
+        <line class="thr" x1="335" x2="335" y1="14" y2="300"/>
+        <text x="325" y="24" text-anchor="end" style="font-size:12px">el pico: unos 350 ppm en total</text>
+        <path class="ln1 draw" pathLength="1" d="M130 297.3 C 230 297.3 235 47 335 47 C 435 47 440 241 540 241"/>
+        <path class="ln2 draw" pathLength="1" d="M130 296.1 C 230 296.1 235 12 335 12 C 435 12 440 274 540 274"/>
+        <g class="pts">
+          <circle class="pt1" cx="130" cy="297.3" r="6"/><circle class="pt1" cx="335" cy="47" r="6"/><circle class="pt1" cx="540" cy="241" r="6"/>
+          <circle class="pt2" cx="130" cy="296.1" r="6"/><circle class="pt2" cx="335" cy="12" r="6"/><circle class="pt2" cx="540" cy="274" r="6"/>
+          <text class="val" x="349" y="58">27,2</text><text class="val" x="349" y="16">32,4</text>
+          <text class="val" x="554" y="245">8,71</text><text class="val" x="554" y="278">2,5</text>
+          <text class="val" x="144" y="290">0,8</text><text class="val" x="144" y="313">1,3</text>
+        </g>
+        <text x="130" y="336" text-anchor="middle">+200 ppm</text>
+        <text x="335" y="336" text-anchor="middle">+250 ppm</text>
+        <text x="540" y="336" text-anchor="middle">+300 ppm</text>
+      </svg>
+      <div class="legend"><span><i style="background:var(--sig1)"></i>Prueba 1</span><span><i style="background:var(--sig2)"></i>Prueba 2</span><span>Plomo agregado a la tierra</span></div>
+    </div>
+
+    <div class="two reveal" style="margin-top:72px">
+      <div class="big-delta grad">18×<small>más azul en tierra con plomo que en tierra sin plomo (de 1,1 % a 20,2 %)</small></div>
+      <p class="body" style="margin:0">También se probó con tierra real: la de una esquina de mucho tránsito en una zona industrial dio más señal que la de una zona rural. La diferencia es menor, pero se mantiene.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOS FORMAS -->
+<section class="sec alt" id="herramientas">
+  <div class="wrap">
+    <p class="eyebrow reveal">Tres formas de usarla</p>
+    <h2 class="reveal">Elegí según<br>lo que necesites.</h2>
+    <div class="tools stagger">
+      <article class="tool">
+        <span class="tag">Nuestro enfoque actual</span>
+        <h3>Diagnóstico por lotes</h3>
+        <p>Cada muestra problema crece junto a plantas de referencia con plomo conocido, y se comparan entre sí. Así cada ciclo se autocalibra, sin depender de un estándar fijo preparado de antemano.</p>
+        <div class="k">
+          <div><span>Frecuencia</span><span>Cada 2 meses</span></div>
+          <div><span>Referencias por lote</span><span>6 (bajo, medio y alto)</span></div>
+          <div><span>Respuesta</span><span>Posición relativa al límite</span></div>
+        </div>
+        <button class="btn ghost" type="button" data-open-detail="#d-lotes" style="margin-top:26px;align-self:flex-start">Ver cómo se hace</button>
+      </article>
+      <article class="tool">
+        <span class="tag">Simple y seguro</span>
+        <h3>Chequeo rápido</h3>
+        <p>Comparás tu muestra con una referencia y sabés si la tierra pasó el límite de riesgo. Nadie toca el plomo.</p>
+        <div class="k">
+          <div><span>Tierra necesaria</span><span>1 litro</span></div>
+          <div><span>Ciclos de cultivo</span><span>1</span></div>
+          <div><span>Respuesta</span><span>Seguro o en riesgo</span></div>
+        </div>
+        <button class="btn ghost" type="button" data-open-detail="#d-insitu" style="margin-top:26px;align-self:flex-start">Ver cómo se hace</button>
+      </article>
+      <article class="tool">
+        <span class="tag">Más precisa</span>
+        <h3>Medición exacta</h3>
+        <p>Sirve para estimar cuánto plomo hay. Se agregan cantidades conocidas y se busca el punto donde la planta responde más.</p>
+        <div class="k">
+          <div><span>Tierra necesaria</span><span>3 a 9 litros</span></div>
+          <div><span>Margen de error</span><span>±25 › ±17 › ±11 ppm</span></div>
+          <div><span>Respuesta</span><span>Cantidad estimada</span></div>
+        </div>
+        <button class="btn ghost" type="button" data-open-detail="#d-semicuant" style="margin-top:26px;align-self:flex-start">Ver cómo se hace</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="sec dark close" id="cierre">
+  <div class="wrap">
+    <p class="eyebrow reveal">En resumen</p>
+    <h2 class="reveal">Sí. El plomo deja<br><span class="grad">huella en la menta.</span></h2>
+    <p class="body reveal">Analizamos tu suelo con <em>Mentha arvensis</em> y plantas de referencia con plomo conocido. Acercanos un litro de tierra y lo sumamos al próximo lote.</p>
+    <div class="cta-row reveal">
+      <button class="btn" type="button" data-open-detail>Ver el informe completo</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>La menta que detecta el plomo</strong></p>
+    <p>Informe técnico · Fases 2025 y 2026</p>
+  </div>
+</footer>
+
+<!-- ================= INFORME COMPLETO ================= -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Informe completo" aria-hidden="true">
+  <div class="sheet-bar">
+    <div class="sheet-bar-in">
+      <strong>Informe completo</strong>
+      <button class="close-btn" type="button" id="closeSheet">Cerrar</button>
+    </div>
+  </div>
+  <div class="sheet-body">
+    <aside class="toc" aria-label="Índice">
+      <p>Índice</p>
+      <ol id="tocList">
+        <li><a href="#d-resumen">1. Resumen</a></li>
+        <li><a href="#d-intro">2. Introducción</a></li>
+        <li><a href="#d-metodos">3. Materiales y métodos</a></li>
+        <li><a href="#d-resultados">4. Resultados</a></li>
+        <li><a href="#d-discusion">5. Discusión</a></li>
+        <li><a href="#d-conclusiones">6. Conclusiones</a></li>
+        <li><a href="#d-biblio">7. Bibliografía</a></li>
+        <li><a href="#d-gracias">8. Agradecimientos</a></li>
+      </ol>
+    </aside>
+
+    <article class="doc">
+
+<section id="d-resumen">
+<p class="sn">1</p>
+<h2>Resumen</h2>
+
+<p>El presente proyecto desarrolla un método cualitativo y semicuantitativo para la detección de contaminación por plomo en suelos, fundamentado en la respuesta de estrés de la planta Mentha Arvensis y la consecuente variación en los niveles del mentona y mentol en su aceite esencial.</p>
+
+<p>Almirante Brown, el municipio local, posee varios focos de contaminación.</p>
+
+<p>En la fase inicial (2025), se estandarizó química y microbiológicamente el suelo para aislar el plomo como única variable de estudio. El aceite esencial, extraído mediante destilación por arrastre de vapor, se analizó a través de un método cromatográfico adaptado sobre celulosa utilizando una solución reveladora de ácido acético, ácido sulfúrico y etil-vainillina.</p>
+
+<p>Las plantas expuestas al metal exhibieron una reacción colorimétrica más rápida (15 segundos de anticipación) y con tonalidades azules más intensas que el grupo de control.</p>
+
+<p>En la fase actual (2026), la investigación divergió en dos enfoques;</p>
+
+<ul>
+<li>Un modelo matemático basado en adiciones estándar de plomo, identificando un umbral de toxicidad crítica de alrededor de 350 ppm. Mediante la interpolación del pico de estrés máximo y una fórmula de refinamiento de rangos, se logró estimar los niveles de contaminación inicial con una incertidumbre de ±17 ppm.</li>
+<li>Un protocolo de diagnóstico rápido <em>in situ</em> que prescinde de adiciones sucesivas mediante el uso de un estándar. Analizando el aceite esencial de <em>M. arvensis</em>, el modelo identifica la inhibición de la ruta biosintética del mentol y la consecuente acumulación de mentona ante una fuente de estrés agudo, permitiendo determinar si el sustrato supera el umbral de fitotoxicidad crítica.</li>
+</ul>
+
+</section>
+
+<section id="d-intro">
+<p class="sn">2</p>
+<h2>Introducción y marco teórico</h2>
+
+<p>La contaminación de suelos por metales pesados representa una problemática ambiental crítica en ámbitos urbanos y agrícolas (Rashid et al., 2023) (Alengebawy et al., 2021) .</p>
+
+<p>En el partido de Almirante Brown, distintos relevamientos de ACUMAR han identificado la existencia de fuentes potenciales de exposición a metales pesados asociadas tanto a actividades industriales como a prácticas informales de gestión y recuperación de residuos: en el barrio La Cumbre se registraron la proximidad de una zona industrial, depósitos y acopio de chatarra y metales, quema de cables y antecedentes de actividades vinculadas con baterías; asimismo, el relevamiento toxicológico detectó concentraciones de plomo por encima de los valores de referencia en sitios relacionados con la separación de material metálico y la quema de cables, además de casos de exposición al plomo en población infantil.</p>
+
+<p>En Campo Ramos, ACUMAR encontró concentraciones elevadas de plomo frente a un sitio donde se acumulaban residuos de aparatos eléctricos y electrónicos (RAEE) y se realizaba su quema, demostrando que estas prácticas pueden constituir focos localizados de contaminación ambiental. Este contexto se complementa con antecedentes industriales como el de Ran-Bat, posteriormente Arcynur, una fábrica de baterías ubicada en el SIPAB, respecto de la cual ACUMAR registró en 2019 acciones de evaluación toxicológica por sospecha de contaminación con metales entre sus trabajadores. En conjunto, estos antecedentes muestran que la problemática del plomo en Almirante Brown no se limita a una única fuente, sino que puede afectar a una gran cantidad de vecinos en proximidad con estos focos.</p>
+
+<p>Esta investigación se fundamenta en un marco de trabajo científico previo el cual demuestra que, bajo condiciones controladas de estrés salino, la planta Mentha Arvensis experimenta alteraciones metabólicas significativas: sus niveles del monoterpeno mentona se duplican o incrementan entre 2 y 2.5 veces, mientras que los niveles de mentol permanecen estables. (Kumar et al., 2023)</p>
+
+<p>A partir de dicho antecedente, se formuló la siguiente pregunta de investigación: ¿Produce el estrés abiótico por presencia de plomo (Pb) un efecto análogo sobre la biosíntesis de mentona en Mentha Arvensis?</p>
+
+<p>El objetivo central de este proyecto consiste en validar a la Mentha Arvensis como un bioindicador eficaz y accesible para la determinación de plomo en el suelo. El trabajo vincula directamente saberes curriculares de Química Analítica, Ecología y Sostenibilidad, transformando la respuesta fisiológica vegetal ante la toxicidad por metales en una herramienta de diagnóstico colorimétrica y semicuantitativa para tanto productores agrícolas como la comunidad local.</p>
+
+</section>
+
+<section id="d-metodos">
+<p class="sn">3</p>
+<h2>Desarrollo: materiales y métodos</h2>
+
+<h3>3.1 Preparación, contaminación y estandarización química del suelo</h3>
+
+<p>Se utilizó una muestra madre de tierra de 12 litros, la cual fue fragmentada en dos porciones idénticas de 6 litros: la primera condición (suelo contaminado experimental) y la segunda condición (suelo control no contaminado). Con el fin de asegurar que el metal se volviera biodisponible, la primera condición fue tratada con una mezcla de 3 gramos de acetato de plomo y 3 gramos de filamentos de plomo metálico. Ambas condiciones se mantuvieron en bachas idénticas cubiertas con una tela fina protectora para evitar el escape de micropartículas hacia el ambiente, añadiendo materia orgánica periódicamente.</p>
+
+<p>El sustrato se dejó reposar durante un periodo crítico de cuatro meses, tiempo requerido para lograr la estabilización del pH del sistema. Teóricamente, la adición inicial de acetato de plomo reduce levemente el pH; posteriormente, la metabolización del acetato a dióxido de carbono genera ácido carbónico, provocando un nuevo descenso, el cual se compensa paulatinamente por la corrosión de los filamentos metálicos hacia hidróxido de plomo y la amortiguación microbiológica natural. Al cabo de los cuatro meses, la primera condición estabilizó su pH a -0.2 puntos de diferencia respecto a la condición control.</p>
+
+<p>Para garantizar que la única variable discordante fuese la concentración de plomo, se procedió a igualar los parámetros físicos y químicos del suelo:</p>
+
+<ul>
+<li><strong>Ajuste de pH:</strong> Se añadieron cenizas a la primera condición hasta neutralizar la diferencia de acidez. Para evitar discrepancias en el perfil de nutrientes, se dosificó la misma masa de cenizas en la segunda condición, previamente neutralizadas con ácido cítrico diluido, adicionando en paralelo una cantidad equivalente de acetato de potasio en la primera condición. Tras este procedimiento, ambas muestras estabilizaron su pH en un valor idéntico de 6.50.</li>
+<li><strong>Esterilización y Control Microbiológico:</strong> Con el objeto de mitigar sesgos provocados por diferentes consorcios bacterianos o fúngicos, ambas porciones de suelo fueron sometidas a un tratamiento térmico a 120 °C durante 3 horas en un horno casero de piedra. Para mitigar la influencia de esporas remanentes que resisten la esterilización, el ciclo de cultivo se programó estratégicamente en el rango de Junio-Agosto, coincidiendo con la estación más seca y fría.</li>
+<li><strong>Reintroducción de Microorganismos Controlada:</strong> Se descartó la mezcla directa de compost para evitar la reducción de la sensibilidad analítica. En su lugar, se inundó compost en agua destilada y se dosificaron volúmenes idénticos del líquido sobrenadante (previo mezclado y agitación) en cada una de las condiciones.</li>
+<li><strong>Homogeneización de Nutrientes y Riego Compartimentado:</strong> Se aplicó un fertilizante completo NPK en proporciones estrictamente idénticas en ambas bachas. Se implementó un protocolo de riego cerrado con recirculación total del agua drenada, evitando de forma absoluta el lavado de las sales solubles de plomo y previniendo la contaminación secundaria del entorno.</li>
+</ul>
+
+<div class="callout"><p>Originalmente (Ver 4.3, Segunda Tabla), éste proceso de estandarización de suelo se realizaría a una condición de sustrato a ser analizada, previo al advento de los métodos 3.4. y 3.5.</p></div>
+
+<h3>3.2 Proceso de cultivo y recolección de analitos</h3>
+
+<p>Se dispusieron tres pares de macetas en total, ocupando 6 litros de suelo. En cada una de ellas se trasplantó un plantín de Mentha Arvensis de dimensiones homogéneas, todos ellos clonados a partir de un único ejemplar madre. El desarrollo vegetal se extendió por un periodo de dos meses (Junio-Agosto), manteniendo el sustrato cubierto de manera sistemática entre riegos. Concluida la etapa de crecimiento, se recolectó una masa idéntica en gramos de tejido foliar por cada planta. Dicha cosecha se efectuó antes del amanecer, minimizando así las pérdidas por evaporación diferencial entre el mentol y la mentona, y las muestras se procesaron en un intervalo máximo de una hora.</p>
+
+<h3>3.3 Extracción del aceite esencial y ensayo colorimétrico adaptado</h3>
+
+<p>La extracción se realizó mediante destilación por arrastre de vapor empleando un balón de tres bocas y un refrigerante Liebig, asegurando el lavado exhaustivo del instrumental entre cada muestra. El aceite esencial obtenido se separó del hidrosol y se envasó en frascos color caramelo, almacenados a una temperatura inferior a 25 °C para prevenir procesos de oxidación térmica o lumínica.</p>
+
+<p>Ante la imposibilidad de acceder a estándares puros de mentona para un análisis de cromatografía en capa fina tradicional cuantificado por ImageJ, se diseñó un método analítico alternativo y adaptado: tiras de celulosa (Ashless, 100%) fueron atomizadas con una solución reactiva compuesta por 5% de ácido acético, 1% de ácido sulfúrico y 1% de etil-vainillina disueltos en etanol absoluto. Tras un secado inicial, se sembraron alícuotas fijas del aceite esencial analito o extracto analito y las tiras se introdujeron en un horno a 105 °C durante un periodo exacto de 1 minuto.</p>
+
+<h3 id="d-semicuant">3.4 Marco de transición semicuantitativa (metodología 2026)</h3>
+
+<p>Durante la primera parte del año 2026, la investigación se centró en dotar al método cualitativo de capacidades semicuantitativas. Tomando como base que los promedios de plomo en suelos oscilan en 100 ppm en entornos urbanos (Ratto et al., 2004) y 34 ppm en entornos agrícolas (Manassero et al., 2013), y que el marco regulatorio argentino (SENASA 431/2024) establece un límite máximo de 375 ppm, se determinó experimentalmente que el punto de inflexión fisiológico donde el daño celular por iones Pb (Gratão et al., 2005) supera el incremento de la biosíntesis de mentona se sitúa en torno a las 350 ppm (bajo condiciones estables de pH 6.50).</p>
+
+<p>El protocolo semicuantitativo opera con tres sistemas de control de 3 litros de sustrato (divididos en macetas de 1L con un plantín de raíces incipientes cada una), los cuales son contaminados deliberadamente empleando adiciones estándar de 200 ppm, 250 ppm y 300 ppm de plomo respectivamente. Tras la destilación y el ensayo colorimétrico (Utilizando 2% de etil-vainillina para aumentar la sensibilidad), la muestra que manifieste la mayor intensidad y velocidad colorimétrica indicará la cercanía al pico crítico de 350 ppm totales, permitiendo extrapolar la concentración inicial a través de tres escenarios lógicos:</p>
+
+<ul>
+<li><strong>Escenario 1 (Pico Intermedio):</strong> Si la coloración cumple la relación analítica de intensidades 200 ppm &lt; 250 ppm &gt; 300 ppm, la adición de 250 ppm representa el pico de estrés. Esto sitúa matemáticamente la concentración inicial en un rango estimado de 75 a 125 ppm.</li>
+<li><strong>Escenario 2 (Toxicidad Temprana):</strong> Si la intensidad sigue el orden decreciente 200 ppm &gt; 250 ppm &gt; 300 ppm, denota que la adición más baja indujo toxicidad severa sobrepasando el umbral. La contaminación inicial se determina como mayor a 125 ppm.</li>
+<li><strong>Escenario 3 (Estrés Progresivo Bajo):</strong> Si la intensidad se incrementa de forma lineal continua 200 ppm &lt; 250 ppm &lt; 300 ppm, el sistema no ha alcanzado el envenenamiento y la contaminación basal se sitúa por debajo de las 75 ppm, considerándose un suelo seguro.</li>
+</ul>
+
+<p>Para los casos encuadrados en el Escenario 1, se puede aplicar una segunda fase de refinamiento experimental empleando la siguiente ecuación para delimitar las nuevas adiciones estándar (donde B es la concentración central previa):</p>
+
+<p class="formula">Nueva Concentración = B ± (ΔAC / 3)</p>
+
+<p>Para un valor central B de 250 ppm, el cálculo proporciona nuevos límites de control de 233 ppm y 266 ppm. Al ejecutar el ensayo con los valores refinados (233, 250 y 266 ppm), la ventana de incertidumbre analítica se contrae de ±25 ppm a un valor de ±17 ppm.</p>
+
+<h3 id="d-insitu">3.5 Protocolo de diagnóstico rápido in situ (metodología alternativa 2026)</h3>
+
+<p>Para escenarios analíticos que presenten restricciones de volumen de sustrato o requieran una optimización de los tiempos de respuesta operativa frente a los ensayos tradicionales de laboratorio, se desarrolló un método alternativo basado en biomarcadores directos. Este procedimiento prescinde de la fase de adiciones estándar sucesivas y opera bajo una condición basal única de un litro de sustrato inoculado con un ejemplar de <em>Mentha arvensis</em>.</p>
+
+<p>A fin de aislar la variable objeto de estudio, el espécimen se somete a un estricto protocolo de exclusión de estresores externos, garantizando un fotoperíodo óptimo, un régimen de irrigación por saturación controlada y la exclusión inmediata del ensayo ante cualquier indicio de fitopatologías o vectores de plagas. También irriga al sujeto con 200 ml de una solución salina (0.1M) la semana previa a la cosecha. Tras el ciclo de desarrollo, se efectúa la extracción del aceite esencial para su posterior enfrentamiento cromático en una tira reactiva frente a un estándar analítico de referencia. Una respuesta positiva (caracterizada por una intensidad de coloración azul superior al estándar) actúa como indicador de una síntesis de mentol elevada, relacionándose con una ruta metabólica exenta de inhibición por metales pesados.</p>
+
+<p>El fundamento bioquímico de este diseño experimental radica en que el estrés abiótico induce una reprogramación metabólica en el organismo vegetal. Este fenómeno desregula la ruta biosintética de los monoterpenos (Caldo et al., 2025), reprimiendo la expresión de la enzima terminal encargada de la conversión hacia mentol y provocando, consecuentemente, la acumulación estequiométrica de precursores intermediarios como la mentona (Cappellari et al., 2020).</p>
+
+<p>El estándar de referencia se determina mediante un proceso de homogeneización analítica. Para ello, se acondicionan muestras matriz de suelo urbano contaminadas deliberadamente con una concentración crítica de 150 ppm de plomo. Tras el desarrollo biológico de <em>M. arvensis</em> bajo estas condiciones, la adición de la solución salina y la subsecuente extracción de sus aceites esenciales, se conjugan los extractos para definir un umbral cromático promedio. Este valor límite representa el punto de inflexión fitotóxico a partir del cual el desarrollo de especies vegetales y herbáceas de consumo manifiesta riesgos potenciales para la salud pública (Madhavan et al., 1989).</p>
+
+<h3 id="d-lotes">3.6 Diagnóstico por lotes (segunda mitad, 2026)</h3>
+
+<p>Durante la segunda mitad de 2026 se desarrolló una nueva modalidad de diagnóstico por lotes orientada a superar las principales limitaciones identificadas en las metodologías descritas en las secciones 3.4 y 3.5. Si bien el método semicuantitativo presentado en 3.4 proporciona una mayor capacidad de estimación de la concentración de plomo, su implementación requiere una cantidad considerable de sustrato contaminado deliberadamente para cada análisis, debido al empleo de sucesivas adiciones estándar. Por otra parte, el protocolo rápido in situ descrito en 3.5 reduce el volumen de material y los tiempos operativos, pero carece de una capacidad semicuantitativa directa y presenta una fuente adicional de incertidumbre al basarse en una doble medición indirecta: primero se infiere el efecto de la concentración de plomo a través de una respuesta fisiológica de la planta y, posteriormente, dicha respuesta se estima mediante una reacción colorimétrica del extracto vegetal.</p>
+
+<p>Como respuesta a estas limitaciones, el diagnóstico por lotes incorpora referencias de concentración conocida que se desarrollan simultáneamente con las muestras problema, de manera que la interpretación del resultado no dependa exclusivamente de un valor cromático absoluto previamente establecido, sino de una comparación directa entre materiales sometidos al mismo ciclo experimental. El procedimiento se organiza en ciclos de análisis realizados aproximadamente cada dos meses, permitiendo generar una referencia interna para cada período de crecimiento.</p>
+
+<p>En cada ciclo se disponen, junto con las plantas de <em>Mentha arvensis</em> correspondientes a las muestras cuyo contenido de plomo se desea determinar, seis unidades de control independientes. Dos de ellas corresponden a blancos, preparados con concentraciones inferiores a 50 ppm de plomo; otras dos corresponden a estándares con una concentración conocida de 150 ppm; y las dos restantes actúan como controles positivos, con una concentración conocida de 350 ppm. De esta manera, cada lote experimental contiene simultáneamente referencias de baja concentración, una concentración intermedia y una concentración inferior al límite regulatorio argentino de 375ppm.</p>
+
+<p>A diferencia de otros procesos comparativos que solo requieren de un control positivo y un control negativo, un tercer standard de 150ppm Pb es incluido para diferenciar sustratos inferiores al umbral fitotoxico (~350ppm Pb) de las que lo han cruzado, y ven su señal colorimetría atenuada por ésto. En caso de que se sospeche una muestra esté por encima del umbral (sea por provenir de una zona de riesgo, o por problemas visuales durante el crecimiento), el periodo de calentamiento de la tira reactiva puede ser reducido a 20 segundos, luego de los cual se aísla la señal colorimetría Verde de la Azul, correspondiente a la mentona. La muestra que supere el umbral fitotóxico verá sus niveles de mentona, y su correspondiente coloración verdosa, significativamente superiores gracias a la disrupción de la vía metabólica. (Cappellari et al., 2020) al STD de 150ppm Pb.</p>
+
+<p>Una vez completado el período de crecimiento y efectuado el procedimiento analítico correspondiente, la respuesta colorimétrica obtenida a partir de cada planta se compara con la respuesta observada en las unidades de concentración conocidas. Este esquema genera una semi curva comparativa de referencia, construida para cada ciclo experimental, que permite ubicar visualmente la muestra problema dentro de un intervalo relativo de respuesta. La utilidad principal del procedimiento no reside en obtener una concentración absoluta con la precisión de una técnica instrumental, sino en determinar si la respuesta de la muestra se encuentra próxima, por debajo o por encima del comportamiento asociado al control positivo de 350 ppm.</p>
+
+<p>La utilización de controles desarrollados en paralelo constituye además una mejora frente al protocolo de diagnóstico rápido presentado en 3.5, debido a que reduce la dependencia de un estándar colorimétrico fijo preparado con anterioridad. Todas las unidades del lote están sometidas al mismo período de crecimiento y, en la medida de lo posible, a las mismas condiciones experimentales, por lo que las diferencias observadas entre las muestras pueden interpretarse dentro del contexto específico de cada ciclo. Esto permite incorporar en la lectura del ensayo parte de la variabilidad experimental asociada al desarrollo vegetal y evita interpretar una respuesta cromática de manera aislada.</p>
+
+<p>Dado que esta metodología constituye un desarrollo reciente, todavía no se ha realizado un análisis estadístico multivariable que permita separar formalmente la contribución relativa de factores como concentración de plomo, temperatura, humedad, iluminación, ventilación, desarrollo vegetal y variación temporal. Por el momento, la interpretación se mantiene en un nivel comparativo y semi-cuantitativo, utilizando los controles internos de cada lote como referencia experimental.</p>
+
+<p>Como etapa de desarrollo futuro, se plantea la incorporación de un bio-greenhouse inteligente destinado a estandarizar automáticamente las condiciones de crecimiento de cada lote. El sistema permitirá registrar y controlar de manera independiente variables como temperatura, humedad, intensidad o régimen lumínico y ventilación. La automatización de estas condiciones tendría como finalidad reducir las diferencias de estrés multiplicativo asociadas a la estacionalidad y mejorar la comparabilidad entre ciclos.</p>
+
+</section>
+
+<section id="d-resultados">
+<p class="sn">4</p>
+<h2>Resultados obtenidos</h2>
+
+<h3>4.1 Análisis cromático cualitativo y cinética de reacción</h3>
+
+<p>Debido al carácter exploratorio y de prueba de concepto de la presente metodología, y considerando los prolongados ciclos de desarrollo biológico requeridos para cada espécimen de <em>Mentha arvensis</em>, las evaluaciones cromáticas se ejecutaron mediante un diseño de réplicas selectas (n = 2 a n = 3) por cada variante metodológica. Los datos obtenidos se presentan de forma desagregada y absoluta a fin de garantizar la máxima transparencia analítica. A pesar de la acotada escala muestral, los perfiles aromáticos y los valores de fracción de área (%a) exhibieron una notable consistencia interna y estabilidad en sus tendencias, validando la reproducibilidad operativa de los protocolos desarrollados para el año 2026.</p>
+
+<p>En cuanto al ensayo analítico, el calentamiento de las tiras reactivas reveló la formación de manchas nítidas con una coloración que oscila en la gama del azul-celeste al verde oscuro. El analito proveniente del suelo contaminado exhibió de forma sistemática una cinética de reacción acelerada, manifestando el viraje de color aproximadamente 15 segundos antes que la muestra control.</p>
+
+<p>Asimismo, desarrolló tonalidades azuladas más profundas y con una saturación cromática perceptiblemente mayor. Ensayos paralelos enriquecidos artificialmente con mentol puro demostraron que el cambio de color hacia el azul está determinado por la concentración relativa de éste, sin afectar la velocidad de viraje ni la saturación, confirmando la especificidad del ensayo ante el estrés.</p>
+
+<p>Para mitigar la saturación y mejorar la definición analítica, se extrae una alícuota de 0.1 ml de aceite esencial y se diluye en un volumen de 1 ml de etanol absoluto.</p>
+
+<h3>4.2 Estandarización del procesamiento digital de imágenes</h3>
+
+<p>Para la objetivación de los perfiles cromáticos, las imágenes de las tiras reactivas se procesaron digitalmente mediante el software de análisis <em>ImageJ</em>. Inicialmente, se configuraron los parámetros de lectura a través del comando <em>Set Measurements</em>, habilitando la variable <em>Area Fraction</em> para la obtención de datos porcentuales.</p>
+
+<p>El aislamiento del espectro cromático de interés se ejecutó mediante la función <em>Image &gt; Adjust &gt; Color Threshold</em>. El umbral analítico se estandarizó con los siguientes valores; genéricos RGB entre 50 y 200, un umbral mínimo de saturación entre 10 y 20, y un límite máximo de brillo fijado entre 160 y 180. Debido a que los ensayos comparativos se dispusieron de forma adyacente en la misma matriz física, este rango delimitó con especificidad el área correspondiente a la coloración azulada, garantizando la reproducibilidad intermuestral dentro de la misma captura.</p>
+
+<p>Una vez validada la máscara de selección, se aplicó el algoritmo <em>Process &gt; Binary &gt; Make Binary</em> para binarizar la imagen y aislar la región cromática del fondo. Finalmente, se delimitó una ventana de análisis de área fija, con dimensiones suficientes para circunscribir la totalidad de la señal binarizada. Mediante el comando <em>Measure</em>, se determinó el porcentaje de área ocupada por el analito reactivo. Dicha ventana fija se trasladó hacia la señal de la segunda muestra para efectuar una nueva medición, generando así una serie de datos comparativos y reproducibles.</p>
+
+<h3>4.3 Evaluación del ensayo cualitativo original (fase 2025)</h3>
+
+<div class="tw"><table>
+<caption>Tabla 1 · % de área binarizada</caption>
+<thead><tr><th>ID de ensayo</th><th>STD (control)</th><th>Contaminado</th></tr></thead>
+<tbody><tr><td>ID0</td><td>2,9</td><td><b>17,4</b></td></tr><tr><td>ID1</td><td>1,5</td><td><b>9,1</b></td></tr><tr><td>ID6</td><td>1,1</td><td><b>20,2</b></td></tr></tbody>
+</table></div>
+
+<p>Los ensayos iniciales de caracterización cualitativa, desarrollados a partir de muestras bajo condiciones controladas de laboratorio, revelaron una marcada sensibilidad y resolución discriminatoria en la lectura digital. En los tres pares analizados (ID0, ID1 e ID6), se observó un incremento exponencial en el porcentaje de área binarizada para las muestras expuestas a contaminación en comparación con sus respectivos controles basales (STD). En el ensayo ID0, la señal aumentó de 2,9% (STD) a 17,4% (Contaminado); en ID1 pasó de 1,5% a 9,1%; y en ID6 se registró la variación más pronunciada, elevándose de un 1,1% a un 20,2%.</p>
+
+<p>A partir de la consistencia y la magnitud de este diferencial cromático, se procedió a ejecutar una segunda fase experimental orientada a validar la aplicabilidad del método sobre matrices ambientales reales y heterogéneas. Para ello, se contrastaron muestras de sustrato provenientes de dos entornos geográficos contrastantes: un suelo recolectado en una intersección vial de alta densidad dentro de un complejo industrial (Ind.) y un suelo testigo extraído de un sector agropecuario o rural (Rur.).</p>
+
+<div class="tw"><table>
+<caption>Tabla 2 · % de área binarizada, suelos reales</caption>
+<thead><tr><th>ID de ensayo</th><th>Rural (testigo)</th><th>Industrial</th></tr></thead>
+<tbody><tr><td>ID2</td><td>4,0</td><td><b>6,1</b></td></tr><tr><td>ID3</td><td>1,9</td><td><b>3,2</b></td></tr></tbody>
+</table></div>
+
+<p>Los datos resultantes de esta validación de campo se encuentran detallados en la tabla superior. A diferencia de los ensayos controlados de laboratorio, los perfiles cromáticos de las muestras reales exhibieron márgenes de variación más estrechos, aunque conservando de manera sistemática la tendencia esperada. Para el bloque ID2, el sustrato de origen industrial registró una fracción de área de 6,1%, superando al sustrato de entorno rural que marcó un 4,0%. De igual modo, la réplica ID3 reflejó esta asimetría analítica con un 3,2% para la muestra industrial frente a un 1,9% medido en la muestra rural. En ambos pares se ratifica una diferenciación cromática cuantificable, caracterizada por un gradiente de separación menor y más ajustado que el obtenido bajo adiciones artificiales de laboratorio</p>
+
+<h3>4.4 Validaciones del marco semicuantitativo 1: modelo de adiciones estándar</h3>
+
+<div class="tw"><table>
+<caption>Tabla 3 · % de área binarizada según el plomo añadido (mg/L)</caption>
+<thead><tr><th>ID de ensayo</th><th>200</th><th>250</th><th>300</th></tr></thead>
+<tbody><tr><td>ID4</td><td>0,8</td><td><b>27,2</b></td><td>8,71</td></tr><tr><td>ID5</td><td>1,3</td><td><b>32,4</b></td><td>2,5</td></tr></tbody>
+</table></div>
+
+<p>Los datos experimentales consolidados mediante el procesamiento digital de las réplicas ID4 e ID5 validan el comportamiento parabólico predicho en el Escenario 1 (Pico Intermedio). Al analizar la fracción de área binarizada, se observa un incremento crítico y abrupto al pasar de una adición de 200 ppm (0,8% y 1,3%) a un pico máximo en la adición de 250 ppm, alcanzando valores de 27,2 y 32,4 respectivamente. Posteriormente, las muestras sometidas a la adición de 300 ppm evidencian una marcada retracción en el porcentaje de área (8,71% y 2,5%).</p>
+
+<h3>4.5 Validaciones del marco semicuantitativo 2: diagnóstico rápido <em>in situ</em></h3>
+
+<div class="tw"><table>
+<caption>Tabla 4 · % de área binarizada</caption>
+<thead><tr><th>ID de ensayo</th><th>STD (referencia)</th><th>In situ</th></tr></thead>
+<tbody><tr><td>ID7</td><td>11,6</td><td><b>26,0</b></td></tr><tr><td>ID8</td><td>10,7</td><td><b>15,6</b></td></tr></tbody>
+</table></div>
+
+<p>Las lecturas de las réplicas ID7 e ID8 muestran de forma consistente que las muestras evaluadas bajo la condición in situ presentan un porcentaje de área binarizada significativamente mayor al umbral definido por el estándar biológico de referencia (STD). Para la réplica ID7, el estándar de referencia registró un valor basal de 11,6%, mientras que el analito obtenido in situ alcanzó un 26,0%. De manera homóloga, la réplica ID8 exhibió un valor para el estándar de 10,7% frente a un 15,6% de la muestra de campo. En ambos ensayos independientes se constata el mismo comportamiento analítico, donde la señal cromática de la muestra incógnita supera de forma absoluta el límite de control del estándar.</p>
+
+</section>
+
+<section id="d-discusion">
+<p class="sn">5</p>
+<h2>Discusión de los resultados</h2>
+
+<h3>5.1 Mecanismos bioquímicos e interpretación del ensayo cualitativo</h3>
+
+<p>La marcada diferenciación en la fracción de área azul observada en la fase inicial (Tabla 1), donde las muestras contaminadas superaron holgadamente el 9% y 17% de saturación frente a controles inferiores al 3%, proporciona una evidencia cualitativa del impacto del plomo (Pb) sobre el metabolismo secundario de <em>Mentha arvensis</em>.</p>
+
+<p>Este fenómeno se fundamenta en la respuesta general de estrés abiótico de la planta ante la toxicidad por metales pesados. La presencia de iones de plomo exógenos actúa como un agente inductor que estimula una mayor concentración y síntesis defensiva de aceites esenciales en el tejido vegetal. Dado que la solución reveladora reacciona ante los componentes mayoritarios de este extracto incrementado, el aumento del porcentaje de área celeste-azul y la aceleración de 15 segundos en la cinética de viraje ratifican visual y digitalmente el estado de estrés y la consecuente activación metabólica general del espécimen expuesto al contaminante.</p>
+
+<h3>5.2 Dinámica analítica en matrices ambientales reales</h3>
+
+<p>Al trasladar el método a escenarios de campo (Tabla 2), la reducción en los márgenes de fracción de área entre las muestras industriales (6,1% y 3,2%) y rurales (4,0% y 1,9%) responde a la complejidad inherente de las matrices de suelo reales. En condiciones de laboratorio, las adiciones artificiales de metal son no sólo mayores, sino que también altamente biodisponibles. En contraposición, los suelos de entornos urbanos e industriales presentan fenómenos de adsorción en complejos orgánicos y arcillas, lo que limita la fracción de plomo directamente absorbible por las raíces.</p>
+
+<p>A pesar de esta amortiguación de la señal, el sistema demostró una resolución analítica suficiente para discriminar el sustrato de la intersección vial del suelo testigo rural. La mayor acumulación de mentol en los ejemplares industriales se condice con la acumulación histórica de metales pesados derivados de la actividad antropogénica y el tránsito vehicular, validando la sensibilidad del biomarcador incluso ante concentraciones atenuadas o crónicas.</p>
+
+<h3>5.3 Correlación teórica del modelo de adiciones estándar</h3>
+
+<p>El perfil parabólico obtenido en las réplicas ID4 e ID5 del modelo matemático (Tabla 3) representa el aspecto más crítico de la transición semicuantitativa. La obtención de un pico de respuesta máximo a las 250 mg/L de adición (27,2% y 32,4%) seguido de una caída drástica a las 300 mg/L (8,71% y 2,5%) describe con precisión una curva de dosis-respuesta biológica.</p>
+
+<p>Este comportamiento confirma las estimaciones teóricas: partiendo de la base de que un suelo urbano promedio porta una carga basal de alrededor de 100 ppm de plomo, una adición de 250 mg/L eleva la concentración total del sistema a aproximadamente 350 ppm. Los resultados demuestran que este punto representa el límite de resistencia fisiológica de <em>M. arvensis</em>. Por debajo de las 350 ppm, el metal estimula un "disparo" o reprogramación metabólica que acumula mentona (incremento del % de área); sin embargo, al trasponer este umbral crítico, el sistema entra en una fase de fitotoxicidad severa o envenenamiento histológico. El daño celular generalizado colapsa las rutas metabólicas globales de la planta, provocando la caída drástica en la producción de aceites esenciales y la consecuente pérdida de señal cromática en el ensayo.</p>
+
+<h3>5.4 Viabilidad del protocolo de diagnóstico rápido <em>in situ</em></h3>
+
+<p>Finalmente, los resultados del método simplificado (Tabla 4) demuestran la viabilidad de un diagnóstico binario expeditivo sin recurrir a curvas de adición. El estándar de referencia (STD), formulado deliberadamente a partir de un suelo crítico (≈ 250 ppm Pb), establece el umbral normativo y de riesgo biológico a partir del cual el cultivo de hortalizas comienza a ser peligroso.</p>
+
+<p>El hecho de que las muestras analizadas <em>in situ</em> arrojaran valores de área azul significativamente superiores (26,0% y 15,6%) que sus respectivos estándares (11,6% y 10,7%) posee una interpretación directa sobre el estado del sustrato incógnita. Para forzar la diferenciación de esta respuesta y evaluar el potencial metabólico de los especímenes, el protocolo incorporó la adición controlada de una solución de salmuera (200 ml de NaCl a una concentración de 0,1 M). Transcurrida una semana desde el período de aclimatación de la planta a su nuevo entorno salino, este estímulo abiótico forzó la ruta biosintética de los monoterpenos al máximo rendimiento operativo.</p>
+
+<p>En los ejemplares sanos (<em>in situ</em>), el estrés salino indujo una reprogramación metabólica eficiente que disparó de forma segura la síntesis de mentol (manifestado en la alta fracción de área azul). Por el contrario, en el estándar contaminado con +150 ppm de plomo, la enzima terminal permaneció inhibida por el metal pesado, impidiendo que la planta respondiera al estímulo y estancando su señal en valores mínimos. Esto demuestra que la combinación de aclimatación y estímulo salino permite evaluar el estado adaptativo de la planta de manera rápida y segura, consolidando al protocolo como una herramienta eficaz y de bajo costo para el cribado preliminar de suelos.</p>
+
+</section>
+
+<section id="d-conclusiones">
+<p class="sn">6</p>
+<h2>Conclusiones</h2>
+
+<h3>6.1 Síntesis evolutiva del diseño metodológico</h3>
+
+<p>La transición desde el ensayo cualitativo hacia los dos marcos semicuantitativos desarrollados durante el año 2026 estuvo motivada por las limitaciones operativas observadas al trasladar el método al campo. La baja sensibilidad relativa y el estrechamiento de los márgenes cromáticos en matrices reales evidenciaron que el método base resultaba insuficiente para estimar niveles de contaminación en entornos complejos.</p>
+
+<p>Ante esta restricción, el proyecto evolucionó hacia dos soluciones complementarias que expandieron el alcance de la investigación: por un lado, el formalismo matemático del modelo de adiciones estándar, diseñado para contrarrestar la pérdida de sensibilidad mediante la inducción controlada de un pico de estrés detectable; y por el otro, la simplificación robusta del protocolo <em>in situ</em>, que sortea la complejidad de las matrices reales mediante un descarte binario frente a un estándar calibrado a la concentración de riesgo. Ambas ramificaciones demuestran cómo las restricciones operativas de la fase de campo funcionaron como el catalizador metodológico para dotar a la investigación de herramientas cuantitativas reproducibles.</p>
+
+<h3>6.2 Resolución de la pregunta de investigación y logro de objetivos</h3>
+
+<p>En respuesta a la pregunta de investigación formulada al inicio de este estudio (<em>¿Produce el estrés abiótico por presencia de plomo (Pb) un efecto análogo sobre la biosíntesis de mentona en Mentha Arvensis?</em>), los resultados experimentales permiten concluir de manera afirmativa. El estrés abiótico por plomo altera significativamente el rendimiento y la composición cromática del extracto esencial, generando un incremento defensivo de los compuestos orgánicos en el ensayo cualitativo base y una respuesta metabólica susceptible de ser medida y estandarizada mediante análisis digital.</p>
+
+<p>De este modo, se cumplió el objetivo central del proyecto al validar a la <em>Mentha arvensis</em> como un bioindicador eficaz y de bajo costo para la determinación indirecta de plomo en el suelo.</p>
+
+<h3>6.3 Valoración comparativa de los enfoques semicuantitativos</h3>
+
+<p>El desarrollo metodológico de la fase 2026 dio lugar a dos herramientas con filosofías analíticas marcadamente diferentes y complementarias:</p>
+
+<ul>
+<li><strong>Protocolo de Diagnóstico Rápido <em>in situ</em> (Seguridad y Cribado):</strong> Este método demostró que la combinación de aclimatación y estímulo salino permite evaluar el estado adaptativo de la planta de manera rápida y segura, consolidando al protocolo como una herramienta eficaz y de bajo costo para el cribado preliminar de suelos. Su principal ventaja radica en la seguridad del operador: la persona que realiza el testeo no entra en contacto directo con el plomo en ningún momento. Utilizando un único ciclo de crecimiento, una tira reactiva, una pequeña muestra de aceite, y un volumen mínimo de sustrato (1 L), cualquier vecino puede determinar de forma autónoma si su terreno se encuentra en una zona de riesgo o en un entorno seguro para el cultivo de alimentos.</li>
+<li><strong>Modelo Matemático de Adiciones Estándar (Precisión y Exactitud):</strong> Presenta una mayor demanda analítica y logística. Requiere un volumen significativamente mayor de sustrato (3/6/9 L), múltiples ciclos de desarrollo biológico en paralelo y opera bajo la premisa de contaminar deliberadamente el suelo con adiciones estándar del metal pesado. No obstante, penaliza la simplicidad en favor de la exactitud: por cada fase de crecimiento, la ventana de incertidumbre se contrae a razón de un tercio (25 &gt; 16,6 &gt; 11,1), ofreciendo un diagnóstico de alta exactitud.</li>
+</ul>
+
+</section>
+
+<section id="d-biblio">
+<p class="sn">7</p>
+<h2>Bibliografía</h2>
+
+<ul class="refs"><li><b>Autoridad de la Cuenca Matanza Riachuelo [ACUMAR]. (2019, abril).</b> <em>Informe Final EISAAR: Barrio La Cumbre, Almirante Brown</em><b>.</b> Dirección de Salud y Ambiental. <a href="https://www.acumar.gob.ar" target="_blank" rel="noopener">acumar.gob.ar</a></li><li><b>Autoridad de la Cuenca Matanza Riachuelo [ACUMAR]. (2019, diciembre).</b> <em>Informe Final EISAAR: Campo Ramos, Almirante Brown</em><b>.</b> Dirección de Salud y Ambiental. <a href="https://www.acumar.gob.ar" target="_blank" rel="noopener">acumar.gob.ar</a></li><li><b>Alengebawy A, Abdelkhalek ST, Qureshi SR, Wang MQ.</b> Heavy Metals and Pesticides Toxicity in Agricultural Soil and Plants: Ecological Risks and Human Health Implications. Toxics. 2021 Feb 25;9(3):42. <a href="https://doi.org/10.3390/toxics9030042" target="_blank" rel="noopener">doi:10.3390/toxics9030042</a>. PMID: 33668829; PMCID: PMC7996329.</li><li><b>Caldo, F., Mannino, G., &amp; Maffei, M. E. (2025).</b> Salt stress re-routes terpenoid and flavonoid metabolism in peppermint (<em>Mentha × piperita</em> L.). <em>Physiologia Plantarum, 177</em>(6), e70694. <a href="https://doi.org/10.1111/ppl.70694" target="_blank" rel="noopener">https://doi.org/10.1111/ppl.70694</a></li><li><b>Cappellari, L. d. R., Chiappero, J., Palermo, T. B., Giordano, W., &amp; Banchio, E. (2020).</b> Volatile organic compounds from rhizobacteria increase the biosynthesis of secondary metabolites and improve the antioxidant status in <em>Mentha piperita</em> L. grown under salt stress. <em>Agronomy, 10</em>(8), 1094. <a href="https://doi.org/10.3390/agronomy10081094"><u>https://doi.org/10.3390/agronomy10081094</u></a></li><li><b>Gratão, P. L., Prasad, M. N. V., Cardoso, P. F., Lea, P. J., &amp; Azevedo, R. A. (2005).</b> Phytoremediation of heavy metals: Retrospect and prospects. <em>Brazilian Journal of Plant Physiology, 17</em>(1), 133–143. <a href="https://doi.org/10.1590/S1677-04202005000100004"><u>https://doi.org/10.1590/S1677-04202005000100004</u></a></li><li><b>Kumar, D., Punetha, A., Chauhan, A., Suryavanshi, P., Padalia, R. C., Kholia, S., &amp; Singh, S. (2023).</b> Growth, oil and physiological parameters of three mint species grown under saline stress levels. <em>Physiology and Molecular Biology of Plants, 29</em>(7), 1061–1072. <a href="https://doi.org/10.1007/s12298-023-01337-1" target="_blank" rel="noopener">https://doi.org/10.1007/s12298-023-01337-1</a></li><li><b>Madhavan, S., Rosenman, K. D., &amp; Shehata, T. (1989).</b> Lead in soil: Recommended maximum permissible levels. <em>Environmental Research, 49</em>(1), 136–142. <a href="https://doi.org/10.1016/S0013-9351(89)80028-3" target="_blank" rel="noopener">https://doi.org/10.1016/S0013-9351(89)80028-3</a></li><li><b>Manassero, M., da Silva, M., Boff, L. D., &amp; Hurtado, M. A. (2013).</b> Metales pesados en suelos de la planicie costera del Río de la Plata, partidos de Ensenada y Berisso. <em>Ciencia del Suelo, 31</em>(2), 253–264.</li><li><b>Rashid, A., Schutte, B. J., Ulery, A., Deyholos, M. K., Sanogo, S., Lehnhoff, E. A., &amp; Beck, L. (2023).</b> Heavy metal contamination in agricultural soil: Environmental pollutants affecting crop health. <em>Agronomy, 13</em>(6), 1521. <a href="https://doi.org/10.3390/agronomy13061521"><u>https://doi.org/10.3390/agronomy13061521</u></a></li><li><b>Ratto, S., Marceca, E., Moscatelli, G., Abbruzese, D., Bardi, H., Bossi, M., Bres, P., Cordón, G., Di Nano, M. P., Murruni, L., Potarsky, K., &amp; Williams, F. (2004).</b> Evaluación de la contaminación orgánica e inorgánica en un suelo aluvial de la costa del Riachuelo, Buenos Aires, Argentina. <em>Ecología Austral, 14</em>(2), 179–190. <a href="https://ojs.ecologiaaustral.com.ar/index.php/Ecologia_Austral/article/view/1490"><u>https://ojs.ecologiaaustral.com.ar/index.php/Ecologia_Austral/article/view/1490</u></a></li><li><b>Servicio Nacional de Sanidad y Calidad Agroalimentaria. (2024).</b> <em>Resolución SENASA 431/2024. Establecimiento de límites máximos de contaminantes en sustratos y suelos agrícolas</em>. República Argentina.</li></ul>
+
+</section>
+
+<section id="d-gracias">
+<p class="sn">8</p>
+<h2>Agradecimientos</h2>
+
+<p>Agradecemos profundamente a todas las personas e instituciones que hicieron posible el desarrollo y la continuidad de este proyecto de investigación durante las fases 2025 y 2026:</p>
+
+<ul><li>A nuestro profesor referente, Lucas David Montero, por su guía constante, su paciencia y por brindarnos las herramientas del perfil profesional del Técnico Químico necesarias para orientar nuestras hipótesis.</li><li>A la Institución Educativa, a las autoridades y al personal de laboratorio de la EEST N1 de Longchamps, por facilitarnos el uso de las instalaciones, el material de vidrio para la destilación por arrastre de vapor y el espacio seguro para el resguardo de los cultivos.</li><li>Al técnico Norberto Argento, cuya donación de materiales para la destilación fue clave en la etapa de arrastre de vapor.</li><li>A todos los miembros y ex-miembros del equipo que trabajaron en conjunto con todos nosotros para poder llevar a la realidad nuestra idea.</li></ul>
+
+</section>
+
+    </article>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Hoja del informe completo ---------- */
+  var sheet = document.getElementById('sheet');
+  var closeBtn = document.getElementById('closeSheet');
+  var lastFocus = null;
+
+  function scrollSheetTo(sel){
+    var t = sel ? sheet.querySelector(sel) : null;
+    if(!t){ sheet.scrollTop = 0; return; }
+    var bar = sheet.querySelector('.sheet-bar').offsetHeight;
+    var toc = sheet.querySelector('.toc');
+    var tocH = (window.innerWidth <= 900) ? toc.offsetHeight : 0;
+    var y = t.getBoundingClientRect().top - sheet.getBoundingClientRect().top + sheet.scrollTop - bar - tocH - 16;
+    sheet.scrollTop = Math.max(0, y);
+  }
+  function openSheet(target){
+    lastFocus = document.activeElement;
+    sheet.classList.add('open');
+    sheet.setAttribute('aria-hidden', 'false');
+    scrollSheetTo(target);
+    setTimeout(function(){ closeBtn.focus({preventScroll:true}); }, 60);
+  }
+  function closeSheet(){
+    sheet.classList.remove('open');
+    sheet.setAttribute('aria-hidden', 'true');
+    if(lastFocus && lastFocus.focus){ try{ lastFocus.focus({preventScroll:true}); }catch(e){} }
+  }
+  document.querySelectorAll('[data-open-detail]').forEach(function(b){
+    b.addEventListener('click', function(){ openSheet(b.getAttribute('data-open-detail')); });
+  });
+  closeBtn.addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && sheet.classList.contains('open')) closeSheet(); });
+
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('#tocList a'));
+  tocLinks.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var t = sheet.querySelector(a.getAttribute('href'));
+      if(t) t.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+    });
+  });
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          tocLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id); });
+        }
+      });
+    }, {root: sheet, rootMargin: '-20% 0px -70% 0px', threshold: 0});
+    sheet.querySelectorAll('.doc section').forEach(function(s){ io.observe(s); });
+  }
+
+  /* ---------- Tira reactiva interactiva ---------- */
+  var TXT = {
+    blank: ['Tu suelo se parece a uno con poco plomo.', 'Responde como los blancos del lote, con menos de 50 ppm.'],
+    std:   ['Tu suelo se parece a uno con unos 150 ppm.', 'Es el nivel desde el cual cultivar alimentos empieza a ser riesgoso. Conviene mirar la tierra más de cerca.'],
+    pos:   ['Tu suelo se parece a uno con unos 350 ppm.', 'Es un nivel alto, cerca del límite de la normativa argentina (375 ppm). Conviene no cultivar alimentos ahí y consultar a un laboratorio.'],
+    mid:   ['Tu muestra cae entre dos referencias.', 'Informamos un rango en vez de un número exacto, por ejemplo entre 150 y 350 ppm.']
+  };
+  var ON = { blank:['blank'], std:['std'], pos:['pos'], mid:['std','pos'] };
+  var segBtns = document.querySelectorAll('.seg button');
+  var refCols = document.querySelectorAll('.spot-col[data-ref]');
+  var verdict = document.getElementById('verdict');
+  var vt = document.getElementById('vt'), vs2 = document.getElementById('vs2');
+  function mark(v){ refCols.forEach(function(c){ c.classList.toggle('on', ON[v].indexOf(c.getAttribute('data-ref')) > -1); }); }
+  mark('blank');
+  segBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var v = b.getAttribute('data-v');
+      segBtns.forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      mark(v);
+      verdict.classList.add('swap');
+      setTimeout(function(){ vt.textContent = TXT[v][0]; vs2.textContent = TXT[v][1]; verdict.classList.remove('swap'); }, 230);
+    });
+  });
+
+  /* ---------- Frase dividida en palabras ---------- */
+  var st = document.getElementById('statement');
+  if(st){
+    var words = st.textContent.trim().split(/\s+/);
+    st.innerHTML = words.map(function(w){ return '<span class="w">' + w + ' </span>'; }).join('');
+  }
+
+  /* ---------- Animaciones ---------- */
+  if(!window.gsap || !window.ScrollTrigger || reduce){
+    document.documentElement.classList.add('static');
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.to('#progress', {scaleX:1, ease:'none', scrollTrigger:{trigger:document.body, start:'top top', end:'bottom bottom', scrub:0.2}});
+
+  /* Hero: entrada única + hoja que se acerca con el scroll */
+  gsap.from('.leaf-in', {opacity:0, scale:.8, y:50, duration:1.5, ease:'power3.out'});
+  gsap.from('.hero-copy > *', {opacity:0, y:24, duration:1.1, stagger:.12, ease:'power3.out', delay:.15});
+
+  var hero = gsap.timeline({
+    defaults:{ease:'none'},
+    scrollTrigger:{trigger:'.hero', start:'top top', end:'+=170%', scrub:.7, pin:'.hero-pin', anticipatePin:1}
+  });
+  hero.to('.leaf', {scale:2.7, rotation:14, yPercent:6, duration:1}, 0)
+      .to('.hero-copy', {y:-90, autoAlpha:0, duration:.45}, 0)
+      .to('.scroll-cue', {autoAlpha:0, duration:.15}, 0)
+      .to('.leaf', {opacity:.16, duration:.4}, .6)
+      .fromTo('.hero-copy2', {autoAlpha:0, y:50}, {autoAlpha:1, y:0, duration:.4}, .62)
+      .to({}, {duration:.25});
+
+  /* Frase: las palabras se encienden con el scroll */
+  gsap.set('.statement .w', {opacity:.16});
+  gsap.to('.statement .w', {opacity:1, stagger:.14, ease:'none',
+    scrollTrigger:{trigger:'#statement', start:'top 82%', end:'bottom 45%', scrub:true}});
+
+  /* Apariciones */
+  gsap.utils.toArray('.reveal').forEach(function(el){
+    gsap.from(el, {opacity:0, y:36, duration:1, ease:'power3.out', scrollTrigger:{trigger:el, start:'top 90%', once:true}});
+  });
+  gsap.utils.toArray('.stagger').forEach(function(box){
+    gsap.from(box.children, {opacity:0, y:40, duration:.9, stagger:.12, ease:'power3.out', scrollTrigger:{trigger:box, start:'top 88%', once:true}});
+  });
+
+  /* Contadores */
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var end = parseFloat(el.getAttribute('data-count')), o = {v:0};
+    gsap.to(o, {v:end, duration:1.6, ease:'power2.out', onUpdate:function(){ el.textContent = Math.round(o.v); },
+      scrollTrigger:{trigger:el, start:'top 90%', once:true}});
+  });
+
+  /* Pasos: cada uno se enciende al llegar al centro */
+  gsap.utils.toArray('.fstep').forEach(function(s){
+    gsap.fromTo(s, {opacity:.22}, {opacity:1, ease:'none', scrollTrigger:{trigger:s, start:'top 82%', end:'top 52%', scrub:true}});
+  });
+
+  /* Tira: aparece y "revela" sus manchas azules */
+  gsap.from('.strip', {opacity:0, y:50, rotation:-3, duration:1.1, ease:'power3.out', scrollTrigger:{trigger:'.strip', start:'top 88%', once:true}});
+  gsap.from('.spot-wrap', {scale:.2, opacity:0, duration:1.4, stagger:.25, ease:'power3.out', scrollTrigger:{trigger:'.strip', start:'top 80%', once:true}});
+
+  /* Curva: se dibuja con el scroll */
+  var plot = document.querySelector('svg.plot');
+  if(plot){
+    gsap.timeline({scrollTrigger:{trigger:plot, start:'top 78%', end:'bottom 50%', scrub:.6}})
+      .from('.draw', {strokeDashoffset:1, ease:'none', duration:1})
+      .from('.pts', {opacity:0, duration:.35}, '-=.25');
+  }
+
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>
